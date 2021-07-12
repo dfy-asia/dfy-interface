@@ -32,19 +32,7 @@ const BSC_TESTNET_LAUNCH_TOKEN_LIST: { [key: string]: LaunchTokenList } = {
   }
 }
 
-const BSC_LAUNCH_TOKEN_LIST: { [key: string]: LaunchTokenList } = {}
-
-const XCHAIN_LAUNCH_TOKEN_LIST: { [key: string]: LaunchTokenList } = {}
-
-const MATIC_LAUNCH_TOKEN_LIST: { [key: string]: LaunchTokenList } = {}
-
-const BKC_LAUNCH_TOKEN_LIST: { [key: string]: LaunchTokenList } = {}
-
 // use for list token each chain ID
 export const launchTokenListByChainId: { [key: string]: any } = {
-  [ChainId.BSC_TESTNET]: BSC_TESTNET_LAUNCH_TOKEN_LIST,
-  [ChainId.XCHAIN]: XCHAIN_LAUNCH_TOKEN_LIST,
-  [ChainId.MATIC]: MATIC_LAUNCH_TOKEN_LIST,
-  [ChainId.BSC]: BSC_LAUNCH_TOKEN_LIST,
-  [ChainId.BKC]: BKC_LAUNCH_TOKEN_LIST
+  [ChainId.BSC_TESTNET]: BSC_TESTNET_LAUNCH_TOKEN_LIST
 }

@@ -1,6 +1,6 @@
 import { Card } from 'kashi/components'
 import { Helmet } from 'react-helmet'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import styled from 'styled-components'
@@ -16,23 +16,16 @@ const BackgroundMain = styled.div`
     overflow-y: scroll;
 `
 
+const ArrowCenter = styled.div`
+    position: absolute;
+    left: 50%;
+    transform: translateY(-50%);
+`
+
 function LaunchPad(): JSX.Element {
     const { i18n } = useLingui()
 
     const { chainId } = useActiveWeb3React()
-
-    const [items, setItems] = useState<LaunchTokenList[]>([])
-
-    useEffect(() => {
-        try {
-            console.log(chainId)
-            if (chainId) {
-                setItems(Object.values(launchTokenListByChainId[chainId] as LaunchTokenList))
-            }
-        } catch (err) {
-
-        }
-    }, [chainId])
 
     return (
         <>
@@ -52,7 +45,7 @@ function LaunchPad(): JSX.Element {
 
                 <div className="container mx-auto sm:px-6 max-w-5xl">
                     <div className="grid gap-4 sm:gap-12 grid-flow-auto grid-cols-3">
-                        {items.length > 0 && items.map(item => (
+                        {chainId && launchTokenListByChainId[chainId] && Object.values(launchTokenListByChainId[chainId] as LaunchTokenList).map(item => (
                             <Link
                                 className={`${item.available ? 'cursor-pointer' : 'cursor-default'}`}
                                 key={item.contractAddress}
@@ -69,9 +62,6 @@ function LaunchPad(): JSX.Element {
                             </Link>
                         ))}
                     </div>
-                    {items.length === 0 && <div className="text-center text-white">
-                        Coming soon
-                    </div>}
                 </div>
             </BackgroundMain>
         </>

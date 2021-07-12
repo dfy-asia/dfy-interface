@@ -50,10 +50,10 @@ function AppBar(): JSX.Element {
                                     </div>
                                     <div className="hidden sm:block sm:ml-4">
                                         <div className="flex space-x-2">
-                                            {/* <NavLink id={`swap-nav-link`} to={'/swap'}>
+                                            <NavLink id={`swap-nav-link`} to={'/swap'}>
                                                 {i18n._(t`Swap`)}
-                                            </NavLink> */}
-                                            {/* <NavLink
+                                            </NavLink>
+                                            <NavLink
                                                 id={`pool-nav-link`}
                                                 to={'/pool'}
                                                 isActive={(match, { pathname }) =>
@@ -65,12 +65,12 @@ function AppBar(): JSX.Element {
                                                 }
                                             >
                                                 {i18n._(t`Pool`)}
-                                            </NavLink> */}
-                                            {/* {chainId && [ChainId.BSC, ChainId.MATIC, ChainId.BKC, ChainId.BSC_TESTNET].includes(chainId) && (
+                                            </NavLink>
+                                            {chainId && [ChainId.BSC, ChainId.MATIC, ChainId.BKC, ChainId.BSC_TESTNET].includes(chainId) && (
                                                 <NavLink id={`yield-nav-link`} to={'/yield'}>
                                                     {i18n._(t`Yield`)}
                                                 </NavLink>
-                                            )} */}
+                                            )}
                                             {/* {chainId === ChainId.MAINNET && (
                                                 <NavLink id={`sushibar-nav-link`} to={'/sushibar'}>
                                                     {i18n._(t`SushiBar`)}
@@ -85,13 +85,7 @@ function AppBar(): JSX.Element {
                                                     </NavLink>
                                                 )} */}
                                             {chainId &&
-                                                [
-                                                    ChainId.BSC_TESTNET,
-                                                    ChainId.BKC,
-                                                    ChainId.XCHAIN,
-                                                    ChainId.MATIC,
-                                                    ChainId.BSC
-                                                ].includes(
+                                                [ChainId.BSC_TESTNET].includes(
                                                     chainId
                                                 ) && (
                                                     <NavLink id={`bento-nav-link`} to={'/launchpad'}>
@@ -103,13 +97,14 @@ function AppBar(): JSX.Element {
                                                     {i18n._(t`Vesting`)}
                                                 </NavLink>
                                             )} */}
-                                            {/* {chainId &&
+                                            {chainId &&
                                                 [
                                                     ChainId.BKC,
                                                     ChainId.BSC,
                                                     ChainId.XDAI,
                                                     ChainId.FANTOM,
-                                                    ChainId.MATIC
+                                                    ChainId.MATIC,
+                                                    ChainId.MAINNET
                                                 ].includes(chainId) && (
                                                     <ExternalLink
                                                         id={`analytics-nav-link`}
@@ -117,7 +112,7 @@ function AppBar(): JSX.Element {
                                                     >
                                                         {i18n._(t`Analytics`)}
                                                     </ExternalLink>
-                                                )} */}
+                                                )}
                                         </div>
                                     </div>
                                 </div>
@@ -259,7 +254,7 @@ function AppBar(): JSX.Element {
                                                     </QuestionHelper>
                                                 </>
                                             )}
-                                        {/* {chainId && chainId === ChainId.MATIC && (
+                                        {chainId && chainId === ChainId.MATIC && (
                                             <div className="hidden sm:inline-block">
                                                 <a
                                                     className="flex items-center rounded bg-light-green hover:bg-super-light-green p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
@@ -272,7 +267,7 @@ function AppBar(): JSX.Element {
                                                     </div>
                                                 </a>
                                             </div>
-                                        )} */}
+                                        )}
                                         {library && library.provider.isMetaMask && (
                                             <div className="hidden sm:inline-block">
                                                 <Web3Network />
@@ -330,7 +325,7 @@ function AppBar(): JSX.Element {
                                 Dashboard
                             </a> */}
 
-                                {/* <NavLink id={`swap-nav-link`} to={'/swap'}>
+                                <NavLink id={`swap-nav-link`} to={'/swap'}>
                                     {i18n._(t`Swap`)}
                                 </NavLink>
                                 <NavLink
@@ -345,9 +340,9 @@ function AppBar(): JSX.Element {
                                     }
                                 >
                                     {i18n._(t`Pool`)}
-                                </NavLink> */}
+                                </NavLink>
 
-                                {/* {chainId && [ChainId.BSC, ChainId.MATIC, ChainId.BKC, ChainId.BSC_TESTNET].includes(chainId) && (
+                                {chainId && [ChainId.BSC, ChainId.MATIC, ChainId.BKC, ChainId.BSC_TESTNET].includes(chainId) && (
                                     <NavLink id={`yield-nav-link`} to={'/yield'}>
                                         {i18n._(t`Yield`)}
                                     </NavLink>
@@ -357,15 +352,9 @@ function AppBar(): JSX.Element {
                                         <NavLink id={`kashi-nav-link`} to={'/bento/kashi/lend'}>
                                             {i18n._(t`Kashi Lending`)}
                                         </NavLink>
-                                    )} */}
+                                    )}
                                 {chainId &&
-                                    [
-                                        ChainId.BSC_TESTNET,
-                                        ChainId.BKC,
-                                        ChainId.XCHAIN,
-                                        ChainId.MATIC,
-                                        ChainId.BSC
-                                    ].includes(chainId) && (
+                                    [ChainId.BSC_TESTNET].includes(chainId) && (
                                         <NavLink id={`bento-nav-link`} to={'/launchpad'}>
                                             {i18n._(t`Launchpad`)}
                                         </NavLink>
@@ -380,7 +369,7 @@ function AppBar(): JSX.Element {
                                         {i18n._(t`Vesting`)}
                                     </NavLink>
                                 )} */}
-                                {/* {chainId &&
+                                {chainId &&
                                     [
                                         ChainId.MAINNET,
                                         ChainId.BKC,
@@ -395,7 +384,7 @@ function AppBar(): JSX.Element {
                                         >
                                             {i18n._(t`Analytics`)}
                                         </ExternalLink>
-                                    )} */}
+                                    )}
                             </div>
                         </Disclosure.Panel>
                     </>

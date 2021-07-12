@@ -52,14 +52,14 @@ import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useLingui } from '@lingui/react'
 import { useSwapCallback } from '../../hooks/useSwapCallback'
 //import MisoBanner from '../../assets/images/miso-banner.jpg'
-// import SakeBanner from '../../assets/images/sake-banner.jpg'
-// import SakeLogo from '../../assets/images/sake-square.png'
-// import SakeBottle from '../../assets/images/sake-half.png'
+import SakeBanner from '../../assets/images/sake-banner.jpg'
+import SakeLogo from '../../assets/images/sake-square.png'
+import SakeBottle from '../../assets/images/sake-half.png'
 //import MisoLogo from '../../assets/images/miso-logo.png'
 
 export default function Swap() {
     const { i18n } = useLingui()
-    // const toggleNetworkModal = useNetworkModalToggle()
+    const toggleNetworkModal = useNetworkModalToggle()
 
     const loadedUrlParams = useDefaultsFromURLSearch()
 
