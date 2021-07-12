@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { BackgroundDiv, MenuItem, WrapContent, Card } from './components'
 import { useItemFilter } from './useItemFilter'
 import ItemPage from './ItemPage'
+import { Link } from 'react-router-dom'
 
 export {
   ItemPage
@@ -35,7 +36,7 @@ const NFT = () => {
             <div className="flex flex-wrap">
               <div>
                 <div className="pt-2">
-                  {nfts.length} result{nfts.length > 0 ? 's': ''}
+                  {nfts.length} result{nfts.length > 1 ? 's': ''}
                 </div>
               </div>
               {/* <div className="text-right flex-grow">
@@ -48,15 +49,18 @@ const NFT = () => {
           </div>
           <WrapContent className="pl-3 pr-1">
             <div className="grid gap-4 grid-cols-4">
-              {nfts.map((nft, index) => <Card
-                className="cursor-pointer"
+              {nfts.map((nft, index) => <Link
                 key={index}
-                alt={nft.title}
-                src={nft.imageLink}
-                title={nft.title}
-                auther={nft.autherName}
-                createDate={nft.createDate}
-              />)}
+                to="/nft/test">
+                <Card
+                  className="cursor-pointer"
+                  alt={nft.title}
+                  src={nft.imageLink}
+                  title={nft.title}
+                  auther={nft.autherName}
+                  createDate={nft.createDate}
+                />
+              </Link>)}
             </div>
           </WrapContent>
         </div>

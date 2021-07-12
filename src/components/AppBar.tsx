@@ -71,6 +71,9 @@ function AppBar(): JSX.Element {
                                                     {i18n._(t`Yield`)}
                                                 </NavLink>
                                             )}
+                                            <NavLink id={`nft-nav-link`} to={'/nft'}>
+                                                {i18n._(t`NFT`)}
+                                            </NavLink>
                                             {/* {chainId === ChainId.MAINNET && (
                                                 <NavLink id={`sushibar-nav-link`} to={'/sushibar'}>
                                                     {i18n._(t`SushiBar`)}
