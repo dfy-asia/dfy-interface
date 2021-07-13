@@ -56,7 +56,7 @@ function Routes(): JSX.Element {
             {/* BentoApps */}
 
             <Route exact strict path="/nft" component={NFT} />
-            <Route exact strict path="/nft/:address" component={ItemPage} />
+            <Route exact strict path="/nft/:address/:id" component={ItemPage} />
 
             {chainId && LaunchPadAllowChaidId.includes(chainId)
                 && <Route exact strict path="/launchpad" component={LaunchPad} />

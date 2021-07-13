@@ -1,6 +1,6 @@
-import { items, authers } from './items'
+import { items, collections } from './items'
 
 export {
   items,
-  authers,
+  collections,
 }

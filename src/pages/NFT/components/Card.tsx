@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { MdTimelapse } from 'react-icons/md'
 import TimeAgo from 'timeago-react'
 import TokenAndPrice from './TokenAndPrice'
-import { Token } from '../../../constants/nft/items'
+import { NFTItem } from '../../../constants/nft/items'
 
 const CardDiv = styled.div`
   max-width: 256px;
@@ -21,31 +21,19 @@ const CardImage = styled.img`
 `
 
 export interface CardProps {
-  src: string
-  alt: string
-  price: number
-  acceptToken: Token
-  title: string
-  auther: string
-  createDate: number
+  item: NFTItem
   className?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const Card = ({
-  src,
-  alt,
-  price,
-  acceptToken,
-  title,
-  auther,
-  className = '',
-  createDate
+  item,
+  className = ''
 }: CardProps) => {
   return (
     <CardDiv className={`border border-gray-200 ${className}`}>
       <CardImageWrapper>
-        <CardImage alt={alt} src={src} />
+        <CardImage alt={item.title} src={item.contentLink} />
       </CardImageWrapper>
       <div className="p-3">
         <div className="flex justify-between">
@@ -53,26 +41,26 @@ const Card = ({
             <div
               style={{ fontSize: '14px' }} className="text-gray-400"
             >
-              {auther}
+              {item.collection.name}
             </div>
             <div className="truncate flex-1">
-              {title}
+              {item.title}
             </div>
           </div>
-          { price !== 0 && <div className="text-right">
+          { (item.listers && item.listers.length > 0) && <div className="text-right">
             <div style={{ fontSize: '14px' }} className="text-gray-400">Price</div>
             <TokenAndPrice
-              price={price}
-              tokenAddress={acceptToken.address}
-              tokenImageSrc={acceptToken.tokenImage}
-              tokenSymbol={acceptToken.symbol}
+              price={item.listers[0].price}
+              tokenAddress={item.acceptToken.address}
+              tokenImageSrc={item.acceptToken.tokenImage}
+              tokenSymbol={item.acceptToken.symbol}
               size="sm"
               truncateNumber={true}
             />
           </div>}
         </div>
         <div className="mt-5 text-right text-gray-400">
-          <MdTimelapse className="inline-block mr-1" /><span style={{ fontSize: '14px' }}><TimeAgo datetime={createDate} /></span>
+          <MdTimelapse className="inline-block mr-1" /><span style={{ fontSize: '14px' }}><TimeAgo datetime={item.mintedAt} /></span>
         </div>
       </div>
     </CardDiv>

@@ -12,7 +12,7 @@ export {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const NFT = () => {
 
-  const { authers, nfts } = useItemFilter('')
+  const { collections, nfts } = useItemFilter('')
 
   return (<>
     {' '}
@@ -23,11 +23,13 @@ const NFT = () => {
       <div className="flex flex-wrap">
         <div className="px-5 pt-10 bg-gray-100">
           <div className="flex flex-col">
-            {Object.values(authers).map((auther) =><MenuItem
-              key={auther.address} className="hover:bg-gray-200 cursor-pointer"
+            {Object.values(collections).map((collection) =><MenuItem
+              key={collection.contractAddress} className="hover:bg-gray-200 cursor-pointer"
             >
-              <img className="inline-block mr-5 align-middle h-9 w-9 rounded-full" src={auther.profileImage} alt="" />
-              <span className="inline-block align-middle">{auther.name}</span>
+              <div className="inline-block mr-5 align-middle h-9 w-9 rounded-full overflow-hidden">
+                <img src={collection.titleImage} alt="" />
+              </div>
+              <span className="inline-block align-middle">{collection.name}</span>
             </MenuItem>)}
           </div>
         </div>
@@ -51,16 +53,10 @@ const NFT = () => {
             <div className="grid gap-4 grid-cols-4">
               {nfts.map((nft, index) => <Link
                 key={index}
-                to="/nft/test">
+                to={`/nft/${nft.collection.contractAddress}/${nft.id}`}>
                 <Card
                   className="cursor-pointer"
-                  alt={nft.title}
-                  src={nft.imageLink}
-                  price={nft.price}
-                  acceptToken={nft.acceptToken}
-                  title={nft.title}
-                  auther={nft.autherName}
-                  createDate={nft.createDate}
+                  item={nft}
                 />
               </Link>)}
             </div>

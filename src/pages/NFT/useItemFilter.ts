@@ -1,16 +1,20 @@
-import { authers, items } from '../../constants/nft'
+import { collections, items } from '../../constants/nft'
 
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const useItemFilter = (autherAddress: string) => {
+export const useItemFilter = (collectionAddress?: string) => {
 
-  const authersData = Object.values(authers)
+  const collectionsData = Object.values(collections)
+  const resultFilter = items.filter(item => collectionAddress && collectionAddress !== '' ? item.collection.contractAddress === collectionAddress : true)
 
-  const resultFilter = items.filter(item => autherAddress && autherAddress !== '' ? item.autherAddress === autherAddress : true)
+  const fetchItem = (address: string, id: number) => {
+    return items.find((item) => item.collection.contractAddress === address && item.id === id)
+  }
 
   return {
-    authers: authersData,
-    nfts: resultFilter
+    collections: collectionsData,
+    nfts: resultFilter,
+    fetchItem
   }
 }
 
