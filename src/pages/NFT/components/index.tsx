@@ -17,11 +17,16 @@ export const BackgroundDiv = styled.div`
 `
 
 export const MenuItem = styled.div`
-  min-width: 205px;
+  min-width: 190px;
   padding: 10px;
 `
 
 export const WrapContent = styled.div`
   height: calc(100vh - 64px - 82px);
+  overflow-y: scroll;
+`
+
+export const WrapContentAccount = styled.div`
+  height: calc(100vh - 270px);
   overflow-y: scroll;
 `

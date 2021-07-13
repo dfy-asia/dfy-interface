@@ -42,7 +42,7 @@ import Yield from './pages/Yield'
 //import MiniChefV2 from './pages/Yield/minichefv2'
 // import Positions from './pages/Positions'
 import Transactions from './pages/Transactions'
-import NFT, { ItemPage } from './pages/NFT'
+import NFT, { ItemPage, AccountPage } from './pages/NFT'
 
 const LaunchPadAllowChaidId: ChainId[] = [
     ChainId.BSC_TESTNET
@@ -56,8 +56,10 @@ function Routes(): JSX.Element {
             {/* BentoApps */}
 
             <Route exact strict path="/nft" component={NFT} />
+            <Redirect exact strict from="/nft/account/:address" to="/nft/account/:address/collection" />
+            <Route exact strict path="/nft/account/:address/:tab" component={AccountPage} />
             <Route exact strict path="/nft/:address/:id" component={ItemPage} />
-
+            
             {chainId && LaunchPadAllowChaidId.includes(chainId)
                 && <Route exact strict path="/launchpad" component={LaunchPad} />
             }

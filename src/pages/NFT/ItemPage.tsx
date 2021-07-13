@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { BsTagFill } from 'react-icons/bs'
 import { AiFillFile } from 'react-icons/ai'
 import { BiBookContent, BiTransfer } from 'react-icons/bi'
-import { FaList, FaWrench } from 'react-icons/fa'
+import { FaList, FaWrench, FaHandPaper } from 'react-icons/fa'
 import { RiShareBoxFill } from 'react-icons/ri'
 import { useItemFilter } from './useItemFilter'
 import TimeAgo from 'timeago-react'
@@ -78,7 +78,7 @@ const ItemPage = ({
                 <div className="p-5">
                   <div className="mb-5">
                     <div className="inline-block mr-5 align-middle h-9 w-9 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
-                    <span className="text-gray-500">Created by</span> <Link className="text-green-thick" to="#">{nftContent?.mintBy.substring(2, 7)}</Link>
+                    <span className="text-gray-500">Created by</span> <Link className="text-green-thick" to={`/nft/account/${nftContent?.mintBy}`}>{nftContent?.mintBy.substring(2, 7)}</Link>
                   </div>
                   <p>
                     {nftContent?.description}
@@ -175,13 +175,39 @@ const ItemPage = ({
 
             <div className="border border-gray-200 w-full mb-5">
               <div className="border-b border-gray-200 p-3 font-bold">
-                <BsTagFill className="inline-block mr-2" /> Offers
+                <FaHandPaper className="inline-block mr-2" /> Offers
               </div>
               <div className="bg-gray-100">
-                <div className="text-center p-10">
+              {(nftContent?.offers && nftContent?.offers.length > 0) && <table width="100%">
+                  <thead className="border-b border-gray-200 bg-white">
+                    <tr>
+                      <td className="w-1/2 p-3">From</td>
+                      <td className="w-1/2 p-3">Price</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    { nftContent?.offers.map((item, index) => <tr key={index}>
+                      <td className="w-1/2 p-3">
+                        <div className="inline-block mr-3 align-middle h-9 w-9 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
+                        <Link className="text-green-thick" to="#">{item.offersByAddress.substring(2, 7)}</Link>
+                      </td>
+                      <td className="w-1/2 p-3">
+                        <TokenAndPrice
+                          price={item.amount ?? 0}
+                          tokenAddress={nftContent?.acceptToken.address ?? ''}
+                          tokenImageSrc={nftContent?.acceptToken.tokenImage}
+                          tokenSymbol={nftContent?.acceptToken.symbol ?? ''}
+                          size="sm"
+                          className="inline-block mr-6"
+                        />
+                      </td>
+                    </tr>)}
+                  </tbody>
+                </table>}
+                {((nftContent?.offers && nftContent?.offers.length === 0) || !nftContent?.listers) && <div className="text-center p-10">
                   <AiFillFile className="block mx-auto"/>
                   No offers yet
-                </div>
+                </div>}
                 <div className="border-t border-gray-200 p-3">
                   <button
                     className="border border-green-thick text-green-thick bg-white font-bold px-8 py-1"

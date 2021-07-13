@@ -52,6 +52,13 @@ export const collections: { [key: string]: Collection } = {
     contractAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     tokenName: 'Elon Musk NFT',
     tokenSymbol: 'EMBFT'
+  },
+  '0x626939e224FbD56F5DE5b244dC04f8a1cEF40613': {
+    titleImage: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg',
+    name: 'Elon Doge',
+    contractAddress: '0x626939e224FbD56F5DE5b244dC04f8a1cEF40613',
+    tokenName: 'Elon Doge NFT',
+    tokenSymbol: 'EDBFT'
   }
 }
 
@@ -81,6 +88,32 @@ export const items: NFTItem[] = [
   {
     id: 2,
     collection: collections['0x7CE094Bea0e0adF53641310DB1193028D7F7b19a'],
+    title: 'Shiba love love test',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et dui ac ex elementum malesuada quis sed lectus.',
+    contentLink: '/images/nft/testtest.jpg',
+    mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
+    mintedAt: 0,
+    acceptToken: {
+      address: '',
+      name: 'BUSD Token',
+      symbol: 'BUSD',
+      tokenImage: '/images/tokens/busd-square.jpg'
+    },
+    listers: [{
+      ListByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
+      price: 10
+    }],
+    events: [{
+      actionName: 'Created',
+      price: 0,
+      from: '0x0000000000000000000000000000000000000000',
+      to: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
+      actedAt: 0
+    }]
+  },
+  {
+    id: 3,
+    collection: collections['0x626939e224FbD56F5DE5b244dC04f8a1cEF40613'],
     title: 'Shiba love love test',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et dui ac ex elementum malesuada quis sed lectus.',
     contentLink: '/images/nft/testtest.jpg',
