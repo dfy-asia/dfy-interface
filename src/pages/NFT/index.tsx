@@ -4,11 +4,13 @@ import { BackgroundDiv, MenuItem, WrapContent, Card } from './components'
 import { useItemFilter } from './useItemFilter'
 import ItemPage from './ItemPage'
 import AccountPage from './AccountPage'
+import WelcomePage from './WelcomPage'
 import { Link } from 'react-router-dom'
 
 export {
   ItemPage,
-  AccountPage
+  AccountPage,
+  WelcomePage
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
