@@ -56,6 +56,8 @@ const NFT = () => {
                   className="cursor-pointer"
                   alt={nft.title}
                   src={nft.imageLink}
+                  price={nft.price}
+                  acceptToken={nft.acceptToken}
                   title={nft.title}
                   auther={nft.autherName}
                   createDate={nft.createDate}

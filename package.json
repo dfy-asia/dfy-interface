@@ -180,6 +180,7 @@
         "@types/big.js": "^6.1.1",
         "big.js": "^6.1.1",
         "dfy-sdk": "^1.0.2",
-        "react-icons": "^4.2.0"
+        "react-icons": "^4.2.0",
+        "timeago-react": "^3.0.3"
     }
 }

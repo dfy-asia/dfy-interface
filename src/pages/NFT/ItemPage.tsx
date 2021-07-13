@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { BackgroundDiv } from './components'
+import { BackgroundDiv, TokenAndPrice } from './components'
 import styled from 'styled-components'
 import { BsTagFill } from 'react-icons/bs'
 import { AiFillFile } from 'react-icons/ai'
@@ -91,12 +91,14 @@ const ItemPage = ({
 
             <div className="border border-gray-200 p-5 w-full mb-5 bg-gray-100">
               <div className="text-caption2 text-gray-400 mb-3">Current price</div>
-              <div
-                className="mb-3 font-bold text-h4"
-              >
-                <img className="rounded-full w-6 h-6 inline-block mr-3" src="/images/tokens/busd-square.jpg" alt="token"/>
-                <span>1</span>
-              </div>
+              <TokenAndPrice
+                price={1}
+                tokenAddress=""
+                tokenImageSrc=""
+                tokenSymbol="BUSD"
+                size="lg"
+                className="mb-3"
+              />
               <div>
                 <Button className="bg-green-thick">Buy Now</Button>
               </div>
@@ -121,10 +123,14 @@ const ItemPage = ({
                         <Link className="text-green-thick" to="#">F6DB9</Link>
                       </td>
                       <td className="w-1/2 p-3">
-                        <span className="inline-block mr-10">
-                            <img className="rounded-full w-5 h-5 inline-block mr-3" src="/images/tokens/busd-square.jpg" alt="token"/>
-                            <span>1</span>
-                        </span>
+                        <TokenAndPrice
+                          price={1}
+                          tokenAddress=""
+                          tokenImageSrc=""
+                          tokenSymbol="BUSD"
+                          size="sm"
+                          className="inline-block mr-6"
+                        />
                         <button
                           className="border border-green-thick text-green-thick bg-white font-bold px-8 py-1"
                         >
@@ -177,10 +183,13 @@ const ItemPage = ({
                     <BsTagFill className="inline-block mr-2" /> List
                   </td>
                   <td className="p-3">
-                    <div>
-                      <img className="rounded-full w-5 h-5 inline-block mr-3" src="/images/tokens/busd-square.jpg" alt="token"/>
-                      <span>1</span>
-                    </div>
+                    <TokenAndPrice
+                      price={1}
+                      tokenAddress=""
+                      tokenImageSrc="/images/tokens/busd-square.jpg"
+                      tokenSymbol="BUSD"
+                      size="sm"
+                    />
                   </td>
                   <td className="p-3">
                     <div className="inline-block mr-2 align-middle h-5 w-5 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>

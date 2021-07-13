@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import Card from './Card'
+import TokenAndPrice from './TokenAndPrice'
 
 export {
-  Card
+  Card,
+  TokenAndPrice
 }
 
 export const BackgroundDiv = styled.div`
