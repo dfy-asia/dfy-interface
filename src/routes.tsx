@@ -55,8 +55,8 @@ function Routes(): JSX.Element {
             <PublicRoute exact path="/connect" component={Connect} />
             {/* BentoApps */}
 
-            <Route exact strict path="/nft/welcome" component={WelcomePage} />
-            <Route exact strict path="/nft" component={NFT} />
+            <Route exact strict path="/nft" component={WelcomePage} />
+            <Route exact strict path="/nft/list" component={NFT} />
             <Redirect exact strict from="/nft/account/:address" to="/nft/account/:address/collection" />
             <Route exact strict path="/nft/account/:address/:tab" component={AccountPage} />
             <Route exact strict path="/nft/:address/:id" component={ItemPage} />

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const BackgroundMain = styled.div`
@@ -36,7 +37,7 @@ const WelcomePage = () => {
               <div style={{ paddingTop: '125px' }} className="px-10">
                 <div className="text-5xl mb-10">Discover, collect, and sell extraordinary NFTs</div>
                 <div className="text-xl mb-10">on the world&#39;s first &amp; largest NFT marketplace</div>
-                <button className="px-10 py-3 bg-green-thick rounded-lg mr-10 text-white font-bold">Explore</button>
+                <Link to="/nft/list"><button className="px-10 py-3 bg-green-thick rounded-lg mr-10 text-white font-bold">Explore</button></Link>
                 {/* <button className="px-10 py-3 border border-green-thick rounded-lg mr-10">Create</button> */}
               </div>
             </div>

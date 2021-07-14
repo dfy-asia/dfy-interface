@@ -12,8 +12,13 @@ import { useItemFilter } from './useItemFilter'
 import TimeAgo from 'timeago-react'
 
 const ImageWrapper = styled.div`
-  height: 399px;
-  width: 399px;
+  max-height: 399px;
+  max-width: 399px;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    height: auto;
+  }
 `
 
 const CardImage = styled.img`
@@ -58,17 +63,22 @@ const ItemPage = ({
     <Helmet>
       <title>NFT | DFY</title>
     </Helmet>
-    <BackgroundDiv className="overflow-y-scroll">
-      <div className="container mx-auto pt-5">
+    <BackgroundDiv className="overflow-y-scroll pt-10 px-5">
+      <div className="container mx-auto">
         <div className="flex flex-wrap gap-5">
           <div
             style={{
-              width: '399px'
+              maxWidth: '399px'
             }}
           >
             <ImageWrapper className="border border-gray-200 rounded-md overflow-hidden mx-auto mb-5">
               <CardImage alt={nftContent?.title} src={nftContent?.contentLink} /> 
             </ImageWrapper>
+
+            <div className="block lg:hidden md:hidden">
+              <div className="text-green-thick">{nftContent?.collection.name}</div>
+              <div className="text-h1 mb-5">{nftContent?.title}</div>
+            </div>
 
             <div className="border border-gray-200 w-full">
               <div className="border-b border-gray-200 p-3 font-bold truncate">
@@ -111,9 +121,11 @@ const ItemPage = ({
             </div>
 
           </div>
-          <div className="flex-1">
-            <div className="text-green-thick">{nftContent?.collection.name}</div>
-            <div className="text-h1 mb-5">{nftContent?.title}</div>
+          <div className="flex-1 flex-grow">
+            <div className="hidden lg:block md:block">
+              <div className="text-green-thick">{nftContent?.collection.name}</div>
+              <div className="text-h1 mb-5">{nftContent?.title}</div>
+            </div>
 
             {(nftContent?.listers && nftContent?.listers.length > 0) && <div className="border border-gray-200 p-5 w-full mb-5 bg-gray-100">
               <div className="text-caption2 text-gray-400 mb-3">Current price</div>
@@ -146,7 +158,7 @@ const ItemPage = ({
                     { nftContent?.listers.map((item, index) => <tr key={index}>
                       <td className="w-1/2 p-3">
                         <div className="inline-block mr-3 align-middle h-9 w-9 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
-                        <Link className="text-green-thick" to="#">{item.ListByAddress.substring(2, 7)}</Link>
+                        <Link className="text-green-thick" to={`/nft/account/${item.ListByAddress}`}>{item.ListByAddress.substring(2, 7)}</Link>
                       </td>
                       <td className="w-1/2 p-3">
                         <TokenAndPrice
@@ -189,7 +201,7 @@ const ItemPage = ({
                     { nftContent?.offers.map((item, index) => <tr key={index}>
                       <td className="w-1/2 p-3">
                         <div className="inline-block mr-3 align-middle h-9 w-9 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
-                        <Link className="text-green-thick" to="#">{item.offersByAddress.substring(2, 7)}</Link>
+                        <Link className="text-green-thick" to={`/nft/account/${item.offersByAddress}`}>{item.offersByAddress.substring(2, 7)}</Link>
                       </td>
                       <td className="w-1/2 p-3">
                         <TokenAndPrice
@@ -249,11 +261,11 @@ const ItemPage = ({
                   </td>
                   <td className="p-3">
                     <div className="inline-block mr-2 align-middle h-5 w-5 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
-                    <Link className="text-green-thick" to="#">{item.from.substring(2, 7)}</Link>
+                    <Link className="text-green-thick" to={`/nft/account/${item.from}`}>{item.from.substring(2, 7)}</Link>
                   </td>
                   <td className="p-3">
                     <div className="inline-block mr-2 align-middle h-5 w-5 bg-gradient-to-r from-green-thick to-green-thin rounded-full"></div>
-                    <Link className="text-green-thick" to="#">{item.to.substring(2, 7)}</Link>
+                    <Link className="text-green-thick" to={`/nft/account/${item.to}`}>{item.to.substring(2, 7)}</Link>
                   </td>
                   <td className="p-3">
                     <Link className="text-green-thick hover:underline" to="#"><TimeAgo datetime={item.actedAt} /> <RiShareBoxFill className="inline-block" /></Link>

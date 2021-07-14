@@ -24,6 +24,11 @@ export const MenuItem = styled.div`
 export const WrapContent = styled.div`
   height: calc(100vh - 64px - 82px);
   overflow-y: scroll;
+
+  @media only screen and (max-width: 600px) {
+    height: calc(100vh - 300px);
+    padding-bottom: 50px;
+  }
 `
 
 export const WrapContentAccount = styled.div`

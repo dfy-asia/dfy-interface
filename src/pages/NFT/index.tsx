@@ -6,6 +6,7 @@ import ItemPage from './ItemPage'
 import AccountPage from './AccountPage'
 import WelcomePage from './WelcomPage'
 import { Link } from 'react-router-dom'
+import { CgMenuGridO } from 'react-icons/cg'
 
 export {
   ItemPage,
@@ -15,6 +16,8 @@ export {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const NFT = () => {
+
+  const [openCollectionMenu, setOpenCollectionMenu] = useState(false)
 
   const [collectionSelected, setCollectionSelected] = useState<any>()
 
@@ -26,11 +29,37 @@ const NFT = () => {
       <title>NFT | DFY</title>
     </Helmet>
     <BackgroundDiv>
-      <div className="flex flex-wrap">
-        <div className="px-5 pt-10 bg-gray-100">
-          <div className="flex flex-col">
+      <div className="flex flex-wrap bg-gray-100">
+        <div className="px-5 pt-10 pb-5 flex-grow lg:flex-grow-0">
+          <div className="block lg:hidden">
+            <div className="w-full">
+              <MenuItem
+                onClick={() => {
+                  setOpenCollectionMenu(!openCollectionMenu)
+                }}
+              >
+                <CgMenuGridO className="inline-block align-middle" /> <span className="align-middle">Collection</span>
+              </MenuItem>
+              {openCollectionMenu && <div>
+                {Object.values(collections).map((collection) =><MenuItem
+                  key={collection.contractAddress}
+                  className={`hover:bg-gray-300 cursor-pointer ${collection.contractAddress === collectionSelected?.contractAddress ? 'bg-gray-200' : ''}`}
+                  onClick={() => {
+                    setCollectionSelected(collection)
+                  }}
+                >
+                  <div className="inline-block mr-5 align-middle h-9 w-9 rounded-full overflow-hidden">
+                    <img src={collection.titleImage} alt="" />
+                  </div>
+                  <span className="inline-block align-middle">{collection.name}</span>
+                </MenuItem>)}
+              </div> }
+            </div>
+          </div>
+          <div className="hidden lg:block">
             {Object.values(collections).map((collection) =><MenuItem
-              key={collection.contractAddress} className={`hover:bg-gray-300 cursor-pointer ${collection.contractAddress === collectionSelected?.contractAddress ? 'bg-gray-200' : ''}`}
+              key={collection.contractAddress}
+              className={`hover:bg-gray-300 cursor-pointer ${collection.contractAddress === collectionSelected?.contractAddress ? 'bg-gray-200' : ''}`}
               onClick={() => {
                 setCollectionSelected(collection)
               }}
@@ -42,8 +71,8 @@ const NFT = () => {
             </MenuItem>)}
           </div>
         </div>
-        <div className="flex-grow">
-          <div className="pl-5 p-3">
+        <div className="flex-grow flex-1 bg-gray-50">
+          <div className="px-3 py-5">
             <div className="flex flex-wrap">
               <div>
                 {collectionSelected && <div className="pt-3">
@@ -67,8 +96,8 @@ const NFT = () => {
               </div> */}
             </div>
           </div>
-          <WrapContent className="pl-5 pr-1">
-            <div className="grid gap-4 grid-cols-4">
+          <WrapContent className="px-3">
+            <div className="grid gap-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
               {nfts.map((nft, index) => <Link
                 key={index}
                 to={`/nft/${nft.collection.contractAddress}/${nft.id}`}>

@@ -6,12 +6,10 @@ import TokenAndPrice from './TokenAndPrice'
 import { NFTItem } from '../../../constants/nft/items'
 
 const CardDiv = styled.div`
-  max-width: 256px;
+  background-color: white;
 `
 
 const CardImageWrapper = styled.div`
-  width: 256px;
-  height: 268px;
   overflow: hidden;
 `
 
@@ -31,7 +29,7 @@ const Card = ({
   className = ''
 }: CardProps) => {
   return (
-    <CardDiv className={`border border-gray-200 ${className}`}>
+    <CardDiv className={`border border-gray-200 ${className} rounded-md overflow-hidden`}>
       <CardImageWrapper>
         <CardImage alt={item.title} src={item.contentLink} />
       </CardImageWrapper>
