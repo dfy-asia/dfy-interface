@@ -63,7 +63,7 @@ const ItemPage = ({
     <Helmet>
       <title>NFT | DFY</title>
     </Helmet>
-    <BackgroundDiv className="overflow-y-scroll pt-10 px-5">
+    <BackgroundDiv className="overflow-y-scroll pt-10 px-5 bg-gray-50">
       <div className="container mx-auto">
         <div className="flex flex-wrap gap-5">
           <div
@@ -81,7 +81,7 @@ const ItemPage = ({
             </div>
 
             <div className="border border-gray-200 w-full">
-              <div className="border-b border-gray-200 p-3 font-bold truncate">
+              <div className="border-b border-gray-200 bg-white p-3 font-bold truncate">
                 <BiBookContent className="inline-block mr-2" /> About {nftContent?.title}
               </div>
               <div className="bg-gray-100">
@@ -95,7 +95,7 @@ const ItemPage = ({
                   </p>
                 </div>
               </div>
-              <div className="border-b border-t border-gray-200 p-3 font-bold">
+              <div className="border-b border-t bg-white border-gray-200 p-3 font-bold">
                 <FaList className="inline-block mr-2" /> Chain Info
               </div>
               <div className="bg-gray-100">
@@ -143,7 +143,7 @@ const ItemPage = ({
             </div>}
 
             <div className="border border-gray-200 w-full mb-5">
-              <div className="border-b border-gray-200 p-3 font-bold">
+              <div className="border-b border-gray-200 bg-white p-3 font-bold">
                 <BsTagFill className="inline-block mr-2" /> Listings
               </div>
               <div className="bg-gray-100">
@@ -186,7 +186,7 @@ const ItemPage = ({
             </div>
 
             <div className="border border-gray-200 w-full mb-5">
-              <div className="border-b border-gray-200 p-3 font-bold">
+              <div className="border-b border-gray-200 bg-white p-3 font-bold">
                 <FaHandPaper className="inline-block mr-2" /> Offers
               </div>
               <div className="bg-gray-100">

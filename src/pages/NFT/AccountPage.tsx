@@ -22,9 +22,9 @@ const AccountPage = ({
     history.push(`/nft/account/${address}/collection`)
   }
 
-  const [collectionSelected, setCollectionSelected] = useState<any>()
+  // const [collectionSelected, setCollectionSelected] = useState<any>()
 
-  const { collections, nfts } = useItemFilter(collectionSelected?.contractAddress ?? '')
+  const { nfts } = useItemFilter('')
 
   return (<>
     {' '}
@@ -49,7 +49,7 @@ const AccountPage = ({
         </ul>
       </div>
       <div className="flex flex-wrap">
-        <div className="px-5 pt-5 bg-gray-100">
+        {/* <div className="px-5 pt-5 bg-gray-100">
           <div className="flex flex-col">
             {Object.values(collections).map((collection) =><MenuItem
               key={collection.contractAddress} className={`hover:bg-gray-300 cursor-pointer ${collection.contractAddress === collectionSelected?.contractAddress ? 'bg-gray-200' : ''}`}
@@ -63,10 +63,10 @@ const AccountPage = ({
               <span className="inline-block align-middle">{collection.name}</span>
             </MenuItem>)}
           </div>
-        </div>
+        </div> */}
         <div className="flex-grow">
           <WrapContentAccount className="pl-5 pt-5 pr-1 pb-10">
-            <div className="grid gap-4 grid-cols-4">
+            <div className="grid gap-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
               {nfts.map((nft, index) => <Link
                 key={index}
                 to={`/nft/${nft.collection.contractAddress}/${nft.id}`}>
