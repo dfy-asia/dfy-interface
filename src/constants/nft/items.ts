@@ -6,13 +6,15 @@ export interface Token {
 }
 
 export interface Offer {
-  offersByAddress: string,
+  offersByAddress: string
   amount: number
+  acceptToken: Token
 }
 
 export interface Lister {
   ListByAddress: string
   price: number
+  acceptToken: Token
 }
 
 export interface Collection {
@@ -26,6 +28,7 @@ export interface Collection {
 export interface Event {
   actionName: string,
   price: number,
+  acceptToken?: Token
   from: string,
   to: string,
   actedAt: number
@@ -39,7 +42,6 @@ export interface NFTItem {
   contentLink: string
   mintBy: string
   mintedAt: number
-  acceptToken: Token,
   offers?: Offer[],
   listers?: Lister[],
   events: Event[]
@@ -78,12 +80,6 @@ export const items: NFTItem[] = [
     contentLink: '/images/nft/testtest.jpg',
     mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     mintedAt: 0,
-    acceptToken: {
-      address: '',
-      name: 'BUSD Token',
-      symbol: 'BUSD',
-      tokenImage: '/images/tokens/busd-square.jpg'
-    },
     events: [{
       actionName: 'Created',
       price: 0,
@@ -100,15 +96,15 @@ export const items: NFTItem[] = [
     contentLink: '/images/nft/testtest.jpg',
     mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     mintedAt: 0,
-    acceptToken: {
-      address: '',
-      name: 'BUSD Token',
-      symbol: 'BUSD',
-      tokenImage: '/images/tokens/busd-square.jpg'
-    },
     listers: [{
       ListByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
-      price: 10
+      price: 10,
+      acceptToken: {
+        address: '',
+        name: 'BUSD Token',
+        symbol: 'BUSD',
+        tokenImage: '/images/tokens/busd-square.jpg'
+      },
     }],
     events: [{
       actionName: 'Created',
@@ -126,15 +122,15 @@ export const items: NFTItem[] = [
     contentLink: '/images/nft/testtest.jpg',
     mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     mintedAt: 0,
-    acceptToken: {
-      address: '',
-      name: 'BUSD Token',
-      symbol: 'BUSD',
-      tokenImage: '/images/tokens/busd-square.jpg'
-    },
     listers: [{
       ListByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
-      price: 10
+      price: 10,
+      acceptToken: {
+        address: '',
+        name: 'BUSD Token',
+        symbol: 'BUSD',
+        tokenImage: '/images/tokens/busd-square.jpg'
+      },
     }],
     events: [{
       actionName: 'Created',
@@ -152,15 +148,15 @@ export const items: NFTItem[] = [
     contentLink: '/images/nft/testtest.jpg',
     mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     mintedAt: 0,
-    acceptToken: {
-      address: '',
-      name: 'BUSD Token',
-      symbol: 'BUSD',
-      tokenImage: '/images/tokens/busd-square.jpg'
-    },
     listers: [{
       ListByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
-      price: 10
+      price: 10,
+      acceptToken: {
+        address: '',
+        name: 'BUSD Token',
+        symbol: 'BUSD',
+        tokenImage: '/images/tokens/busd-square.jpg'
+      },
     }],
     events: [{
       actionName: 'Created',
@@ -178,20 +174,26 @@ export const items: NFTItem[] = [
     contentLink: '/images/nft/testtest.jpg',
     mintBy: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
     mintedAt: 0,
-    acceptToken: {
-      address: '',
-      name: 'BUSD Token',
-      symbol: 'BUSD',
-      tokenImage: '/images/tokens/busd-square.jpg'
-    },
     listers: [{
       ListByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
-      price: 10
+      price: 10,
+      acceptToken: {
+        address: '',
+        name: 'BUSD Token',
+        symbol: 'BUSD',
+        tokenImage: '/images/tokens/busd-square.jpg'
+      },
     }],
     offers: [
       {
         offersByAddress: '0x7CE094Bea0e0adF53641310DB1193028D7F7b19a',
-        amount: 200
+        amount: 200,
+        acceptToken: {
+          address: '',
+          name: 'BUSD Token',
+          symbol: 'BUSD',
+          tokenImage: '/images/tokens/busd-square.jpg'
+        },
       }
     ],
     events: [{

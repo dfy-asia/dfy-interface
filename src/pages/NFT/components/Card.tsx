@@ -49,9 +49,9 @@ const Card = ({
             <div style={{ fontSize: '14px' }} className="text-gray-400">Price</div>
             <TokenAndPrice
               price={item.listers[0].price}
-              tokenAddress={item.acceptToken.address}
-              tokenImageSrc={item.acceptToken.tokenImage}
-              tokenSymbol={item.acceptToken.symbol}
+              tokenAddress={item.listers[0].acceptToken.address}
+              tokenImageSrc={item.listers[0].acceptToken.tokenImage}
+              tokenSymbol={item.listers[0].acceptToken.symbol}
               size="sm"
               truncateNumber={true}
             />

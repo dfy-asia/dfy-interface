@@ -131,9 +131,9 @@ const ItemPage = ({
               <div className="text-caption2 text-gray-400 mb-3">Current price</div>
               <TokenAndPrice
                 price={nftContent?.listers[0].price ?? 0}
-                tokenAddress={nftContent?.acceptToken.address ?? ''}
-                tokenImageSrc={nftContent?.acceptToken.tokenImage}
-                tokenSymbol={nftContent?.acceptToken.symbol ?? ''}
+                tokenAddress={nftContent?.listers[0].acceptToken.address ?? ''}
+                tokenImageSrc={nftContent?.listers[0].acceptToken.tokenImage}
+                tokenSymbol={nftContent?.listers[0].acceptToken.symbol ?? ''}
                 size="lg"
                 className="mb-3"
               />
@@ -163,9 +163,9 @@ const ItemPage = ({
                       <td className="w-1/2 p-3">
                         <TokenAndPrice
                           price={item.price ?? 0}
-                          tokenAddress={nftContent?.acceptToken.address ?? ''}
-                          tokenImageSrc={nftContent?.acceptToken.tokenImage}
-                          tokenSymbol={nftContent?.acceptToken.symbol ?? ''}
+                          tokenAddress={item.acceptToken.address ?? ''}
+                          tokenImageSrc={item.acceptToken.tokenImage}
+                          tokenSymbol={item.acceptToken.symbol ?? ''}
                           size="sm"
                           className="inline-block mr-6"
                         />
@@ -206,9 +206,9 @@ const ItemPage = ({
                       <td className="w-1/2 p-3">
                         <TokenAndPrice
                           price={item.amount ?? 0}
-                          tokenAddress={nftContent?.acceptToken.address ?? ''}
-                          tokenImageSrc={nftContent?.acceptToken.tokenImage}
-                          tokenSymbol={nftContent?.acceptToken.symbol ?? ''}
+                          tokenAddress={item.acceptToken.address ?? ''}
+                          tokenImageSrc={item.acceptToken.tokenImage}
+                          tokenSymbol={item.acceptToken.symbol ?? ''}
                           size="sm"
                           className="inline-block mr-6"
                         />
@@ -253,9 +253,9 @@ const ItemPage = ({
                   <td className="p-3">
                     { item.price > 0 && <TokenAndPrice
                       price={item.price}
-                      tokenAddress={nftContent?.acceptToken.address ?? ''}
-                      tokenImageSrc={nftContent?.acceptToken.tokenImage}
-                      tokenSymbol={nftContent?.acceptToken.symbol ?? ''}
+                      tokenAddress={item.acceptToken?.address ?? ''}
+                      tokenImageSrc={item.acceptToken?.tokenImage}
+                      tokenSymbol={item.acceptToken?.symbol ?? ''}
                       size="sm"
                     />}
                   </td>
