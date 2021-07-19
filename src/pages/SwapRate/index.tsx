@@ -144,10 +144,12 @@ function SwapRate(): JSX.Element {
                             return <div key={index}>
                                 <ItemRateShow
                                     name={item.exchangeName}
+                                    imageLogoUrl={item.logo}
                                     inputCurrencyId={inputCurrencyId}
                                     outputCurrencyId={outputCurrencyId}
                                     inputValue={inputValue}
                                     factoryAddress={item.factoryAddress}
+                                    url={item.url}
                                 />
                             </div>
                         })}
