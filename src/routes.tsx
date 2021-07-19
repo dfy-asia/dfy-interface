@@ -43,6 +43,7 @@ import Yield from './pages/Yield'
 // import Positions from './pages/Positions'
 import Transactions from './pages/Transactions'
 import NFT, { ItemPage, AccountPage, WelcomePage } from './pages/NFT'
+import SwapRate from './pages/SwapRate'
 
 const LaunchPadAllowChaidId: ChainId[] = [
     ChainId.BSC_TESTNET
@@ -60,7 +61,8 @@ function Routes(): JSX.Element {
             <Redirect exact strict from="/nft/account/:address" to="/nft/account/:address/collection" />
             <Route exact strict path="/nft/account/:address/:tab" component={AccountPage} />
             <Route exact strict path="/nft/:address/:id" component={ItemPage} />
-            
+            <Route exact strict path="/swap-rate" component={SwapRate} />
+
             {chainId && LaunchPadAllowChaidId.includes(chainId)
                 && <Route exact strict path="/launchpad" component={LaunchPad} />
             }

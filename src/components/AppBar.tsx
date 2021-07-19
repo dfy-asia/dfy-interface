@@ -53,6 +53,9 @@ function AppBar(): JSX.Element {
                                             <NavLink id={`swap-nav-link`} to={'/swap'}>
                                                 {i18n._(t`Swap`)}
                                             </NavLink>
+                                            <NavLink id={`swap-nav-link`} to={'/swap-rate'}>
+                                                {i18n._(t`Swap Rate`)}
+                                            </NavLink>
                                             <NavLink
                                                 id={`pool-nav-link`}
                                                 to={'/pool'}
@@ -330,6 +333,9 @@ function AppBar(): JSX.Element {
 
                                 <NavLink id={`swap-nav-link`} to={'/swap'}>
                                     {i18n._(t`Swap`)}
+                                </NavLink>
+                                <NavLink id={`swap-nav-link`} to={'/swap-rate'}>
+                                    {i18n._(t`Swap Rate`)}
                                 </NavLink>
                                 <NavLink
                                     id={`pool-nav-link`}

@@ -193,7 +193,7 @@ export default function CurrencyInputPanel({
                     </LabelRow>
                 )} */}
                 <div
-                    className="w-full sm:w-2/5"
+                    className={`w-full ${!hideInput ? 'sm:w-2/5' : 'text-center'}`}
                     // style={hideInput ? { padding: '0', borderRadius: '8px' } : {}}
                     // selected={disableCurrencySelect}
                 >
@@ -277,7 +277,7 @@ export default function CurrencyInputPanel({
                         </>
                     )} */}
                 </div>
-                <div className="flex items-center rounded bg-white space-x-3 p-3 w-full sm:w-3/5">
+                {!hideInput && <div className="flex items-center rounded bg-white space-x-3 p-3 w-full sm:w-3/5">
                     {!hideInput && (
                         <>
                             {account && currency && showMaxButton && label !== 'To' && (
@@ -314,7 +314,7 @@ export default function CurrencyInputPanel({
                             )}
                         </>
                     )}
-                </div>
+                </div>}
             </div>
             {!disableCurrencySelect && onCurrencySelect && (
                 <CurrencySearchModal
