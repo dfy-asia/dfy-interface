@@ -73,6 +73,7 @@ function SwapRate(): JSX.Element {
 
     const handleMaxInput = useCallback(() => {
         maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
+        maxAmountInput && setInputValue(maxAmountInput.toExact())
     }, [maxAmountInput, onUserInput])
 
     useEffect(() => {
