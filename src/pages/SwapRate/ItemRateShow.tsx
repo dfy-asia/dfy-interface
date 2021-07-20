@@ -38,26 +38,22 @@ const ItemRateShow = ({
 
   useEffect(() => {
     const fetch = async () => {
-      console.log('tokenInput', inputCurrencyId)
       if (!tokenInput || !tokenOutput) return
-      
-      const pair = await fetchPairData(tokenInput, tokenOutput, library, factoryAddress)
-      console.log('pair', pair)
 
-      if (!pair) return
-      const route = new Route([pair], tokenInput)
       const amountIn = utils.parseEther(inputValue !== '' ? inputValue : '0')
-      if (amountIn.gt(0)) {
-          const trade = new Trade(route, new TokenAmount(tokenInput, amountIn.toString()), TradeType.EXACT_INPUT)
-          setPrice(trade.outputAmount.toExact())
-          setTrade(trade)
-      }
+      const pair = await fetchPairData(tokenInput, tokenOutput, library, factoryAddress)
+
+      if (!pair || inputValue === '' || amountIn.lte(0)) return
+      const route = new Route([pair], tokenInput)
+      const trade = new Trade(route, new TokenAmount(tokenInput, amountIn.toString()), TradeType.EXACT_INPUT)
+      setPrice(trade.outputAmount.toExact())
+      setTrade(trade)
     }
     fetch()
   }, [library, inputCurrencyId, outputCurrencyId, chainId, inputValue, factoryAddress, tokenInput, tokenOutput])
 
   return <>
-    {price !== '0' && <div className="p-4 rounded border border-dark-800 mt-4">
+    {price !== '0' && inputValue !== '' && <div className="p-4 rounded border border-dark-800 mt-4">
       <div className="text-white text-xl">
         {imageLogoUrl && <img alt="launchpad" src={imageLogoUrl} className="inline-block h-10 w-10 rounded-full mr-3" />}
         <span>{name}</span>

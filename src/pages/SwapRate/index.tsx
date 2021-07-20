@@ -6,12 +6,13 @@ import styled from 'styled-components'
 import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
+import { useSwapActionHandlers, useSwapState, useDerivedSwapInfo } from 'state/swap/hooks'
 import { Field } from 'state/swap/actions'
 import { useCurrency } from 'hooks/Tokens'
 import { CgArrowsExchangeAltV } from 'react-icons/cg'
 import { useConfig } from './config'
-import { Currency, ETHER } from 'dfy-sdk'
+import { Currency, CurrencyAmount, ETHER } from 'dfy-sdk'
+import { maxAmountSpend } from '../../utils/maxAmountSpend'
 
 import ItemRateShow from './ItemRateShow'
 
@@ -29,23 +30,18 @@ function SwapRate(): JSX.Element {
 
     const factoryAddresses = useConfig(chainId)
 
-    const [inputValue, setInputValue] = useState('')
-    const [outputValue, setOutputValue] = useState('')
-
     const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
+
+    const { currencyBalances, currencies } = useDerivedSwapInfo()
+
+    const [inputValue, setInputValue] = useState('')
     
     const {
         [Field.INPUT]: { currencyId: inputCurrencyId},
         [Field.OUTPUT]: { currencyId: outputCurrencyId }
     } = useSwapState()
 
-    const inputCurrency = useCurrency(inputCurrencyId)
-    const outputCurrency = useCurrency(outputCurrencyId)
-
-    const currencies: { [field in Field]?: Currency } = {
-        [Field.INPUT]: inputCurrency ?? undefined,
-        [Field.OUTPUT]: outputCurrency ?? undefined
-    }
+    const startCurrency = useCurrency('ETH')
 
     const handleTypeInput = useCallback(
         (value: string) => {
@@ -58,7 +54,6 @@ function SwapRate(): JSX.Element {
     const handleTypeOutput = useCallback(
         (value: string) => {
             onUserInput(Field.OUTPUT, value)
-            setOutputValue(value)
         },
         [onUserInput]
     )
@@ -74,6 +69,18 @@ function SwapRate(): JSX.Element {
         onCurrencySelection
     ])
 
+    const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(currencyBalances[Field.INPUT])
+
+    const handleMaxInput = useCallback(() => {
+        maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
+    }, [maxAmountInput, onUserInput])
+
+    useEffect(() => {
+        if (startCurrency) {
+            onCurrencySelection(Field.INPUT, startCurrency)
+        }
+    }, [onCurrencySelection, startCurrency])
+
     return (
         <>
             {' '}
@@ -85,7 +92,7 @@ function SwapRate(): JSX.Element {
                     {/* <img alt="" src={BentoBoxLogo} className="object-scale-down w-40 md:w-60 h-auto" /> */}
 
                     <div className="container mx-auto max-w-3xl">
-                        <div className="font-bold text-center text-4xl my-10">
+                        <div className="font-bold text-center text-4xl my-20">
                             {i18n._(t`Swap Rate`)}
                         </div>
                     </div>
@@ -103,9 +110,7 @@ function SwapRate(): JSX.Element {
                                     showMaxButton={true}
                                     currency={currencies[Field.INPUT]}
                                     onUserInput={handleTypeInput}
-                                    onMax={() => {
-                                        console.log('max')
-                                    }}
+                                    onMax={handleMaxInput}
                                     onCurrencySelect={handleInputSelect}
                                     otherCurrency={currencies[Field.OUTPUT]}
                                     id="swap-currency-input"
@@ -128,7 +133,7 @@ function SwapRate(): JSX.Element {
                                         i18n._(t`Swap To:`)
                                     }
                                     hideInput
-                                    value={outputValue}
+                                    value={''}
                                     showMaxButton={false}
                                     currency={currencies[Field.OUTPUT]}
                                     onUserInput={handleTypeOutput}
