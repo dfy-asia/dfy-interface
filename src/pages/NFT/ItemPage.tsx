@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { BackgroundDiv, TokenAndPrice } from './components'
+import { BackgroundDiv, TokenAndPrice, MakeOfferDialog } from './components'
 import styled from 'styled-components'
 import { BsTagFill } from 'react-icons/bs'
 import { AiFillFile } from 'react-icons/ai'
@@ -64,6 +64,7 @@ const ItemPage = ({
       <title>NFT | DFY</title>
     </Helmet>
     <BackgroundDiv className="overflow-y-scroll pt-10 px-5 bg-gray-50">
+      {/* <MakeOfferDialog /> */}
       <div className="container mx-auto">
         <div className="flex flex-wrap gap-5">
           <div

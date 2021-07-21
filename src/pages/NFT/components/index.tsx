@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 import Card from './Card'
 import TokenAndPrice from './TokenAndPrice'
+import MakeOfferDialog from './MakeOfferDialog'
 
 export {
   Card,
-  TokenAndPrice
+  TokenAndPrice,
+  MakeOfferDialog
 }
 
 export const BackgroundDiv = styled.div`
