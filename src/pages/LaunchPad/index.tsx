@@ -1,12 +1,13 @@
 import { Card } from 'kashi/components'
 import { Helmet } from 'react-helmet'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { launchTokenListByChainId, LaunchTokenList } from '../../constants/launch-token-list'
+import { launchTokenListByChainId, LaunchTokenList } from './config/launch-token-list'
 import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { ChainId } from 'dfy-sdk'
  
 const BackgroundMain = styled.div`
     margin-top: -40px;
@@ -16,16 +17,24 @@ const BackgroundMain = styled.div`
     overflow-y: scroll;
 `
 
-const ArrowCenter = styled.div`
-    position: absolute;
-    left: 50%;
-    transform: translateY(-50%);
-`
-
 function LaunchPad(): JSX.Element {
     const { i18n } = useLingui()
 
     const { chainId } = useActiveWeb3React()
+
+    const [items, setItems] = useState<LaunchTokenList[]>([])
+
+    useEffect(() => {
+        try {
+            if (chainId && chainId !== 1) {
+                setItems(Object.values(launchTokenListByChainId[chainId] as LaunchTokenList[]))
+            } else {
+                setItems(Object.values(launchTokenListByChainId[ChainId.BKC] as LaunchTokenList[]))
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }, [chainId])
 
     return (
         <>
@@ -45,7 +54,7 @@ function LaunchPad(): JSX.Element {
 
                 <div className="container mx-auto sm:px-6 max-w-5xl">
                     <div className="grid gap-4 sm:gap-12 grid-flow-auto grid-cols-3">
-                        {chainId && launchTokenListByChainId[chainId] && Object.values(launchTokenListByChainId[chainId] as LaunchTokenList).map(item => (
+                        {items.map(item => (
                             <Link
                                 className={`${item.available ? 'cursor-pointer' : 'cursor-default'}`}
                                 key={item.contractAddress}
@@ -62,6 +71,9 @@ function LaunchPad(): JSX.Element {
                             </Link>
                         ))}
                     </div>
+                    {items.length === 0 && <div className="text-center text-white">
+                        Coming soon
+                    </div>}
                 </div>
             </BackgroundMain>
         </>

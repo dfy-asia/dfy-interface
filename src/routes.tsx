@@ -3,11 +3,6 @@ import React from 'react'
 import { Redirect, Route, RouteComponentProps, useLocation, Switch } from 'react-router-dom'
 import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import Connect from './kashi/pages/Connect'
-// import BorrowMarkets from './kashi/pages/Markets/Borrow'
-// import CreateMarkets from './kashi/pages/Markets/Create'
-// import LendMarkets from './kashi/pages/Markets/Lending'
-// import BorrowPair from './kashi/pages/Pair/Borrow'
-// import LendPair from './kashi/pages/Pair/Lend'
 import AddLiquidity from './pages/AddLiquidity'
 import {
     RedirectDuplicateTokenIds,
@@ -22,31 +17,21 @@ import Pool from './pages/Pool'
 import PoolFinder from './pages/PoolFinder'
 import RemoveLiquidity from './pages/RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './pages/RemoveLiquidity/redirects'
-// import Saave from './pages/Saave'
-// import SushiBar from './pages/SushiBar'
-// import SushiBarTransactions from './pages/SushiBar/SushiBarTransactions'
-// import SushiBarTips from './pages/SushiBar/Tips'
 import Trade from './pages/Trade'
 import Swap from './pages/Swap'
 import {
     RedirectHashRoutes,
-    // OpenClaimAddressModalAndRedirectToSwap,
     RedirectPathToSwapOnly,
     RedirectToSwap
 } from './pages/Swap/redirects'
-// import Tools from './pages/Tools'
-// import Vesting from './pages/Vesting'
 import Yield from './pages/Yield'
-//import MasterChefV1 from './pages/Yield/masterchefv1'
-//import MasterChefV1Debug from './pages/Yield/masterchefv1/debug'
-//import MiniChefV2 from './pages/Yield/minichefv2'
-// import Positions from './pages/Positions'
 import Transactions from './pages/Transactions'
 import NFT, { ItemPage, AccountPage, WelcomePage } from './pages/NFT'
 import SwapRate from './pages/SwapRate'
 
 const LaunchPadAllowChaidId: ChainId[] = [
-    ChainId.BSC_TESTNET
+    ChainId.BSC_TESTNET,
+    ChainId.BSC
 ]
 
 function Routes(): JSX.Element {
@@ -63,9 +48,7 @@ function Routes(): JSX.Element {
             <Route exact strict path="/nft/:address/:id" component={ItemPage} />
             <Route exact strict path="/swap-rate" component={SwapRate} />
 
-            {chainId && LaunchPadAllowChaidId.includes(chainId)
-                && <Route exact strict path="/launchpad" component={LaunchPad} />
-            }
+            <Route exact strict path="/launchpad" component={LaunchPad} />
             {chainId && LaunchPadAllowChaidId.includes(chainId)
                 && <Route strict path="/launchpad/:address" component={LaunchPadPage} />
             }

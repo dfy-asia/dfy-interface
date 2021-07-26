@@ -10,7 +10,7 @@ import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { Input as NumericalInput } from 'components/NumericalInput'
 import Button from 'components/Button'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { useTokenineSwapContract } from '../../hooks/useContract'
+import { useLaunchpadContract } from '../../hooks/useContract'
 import { BigNumber } from 'ethers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import styled from 'styled-components'
@@ -23,7 +23,7 @@ import { shortenAddress } from '../../utils'
 import useCopyClipboard from '../../hooks/useCopyClipboard'
 import { Token } from 'dfy-sdk'
 import { RouteComponentProps, useHistory } from 'react-router-dom'
-import { launchTokenListByChainId, LaunchTokenList } from '../../constants/launch-token-list'
+import { launchTokenListByChainId, LaunchTokenList } from './config/launch-token-list'
 import Loader from 'components/Loader'
  
 const BackgroundMain = styled.div`
@@ -51,7 +51,7 @@ function LaunchPadPage({
 
     const [launchDetail, setLaunchDetail] = useState<LaunchTokenList>()
     
-    const tokenineSwap = useTokenineSwapContract(address ? address : '')
+    const launchPadContract = useLaunchpadContract(address ? address : '')
 
     const [forBuyingTokenAddress, setForBuyingTokenAddress] = useState('')
     const [forBuyingTokenName, forBuyingTokenSymbol, forBuyingTokenDecimals] = useLaunchToken(forBuyingTokenAddress, account)
@@ -70,7 +70,7 @@ function LaunchPadPage({
     const [luachPadTokenName, luachPadTokenSymbol, luachPadDecimals] = useLaunchToken(launchpadTokenAddress, account)
     const launchCurrencyAmount = useCurrencyBalance(account ?? undefined, launchpadTokenAddress !== '' ? new Token(chainId ?? 0, launchpadTokenAddress, luachPadDecimals, luachPadTokenSymbol, luachPadTokenName) : undefined)
 
-    const [approvalState, approve] = useApproveCallback(forBuyingCurrencyAmount, tokenineSwap ? tokenineSwap.address : '')
+    const [approvalState, approve] = useApproveCallback(forBuyingCurrencyAmount, launchPadContract?.address)
     const addTransaction = useTransactionAdder()
 
     const startTokenToDestinationTokenCalculate = (val: string) => {
@@ -112,39 +112,43 @@ function LaunchPadPage({
         }
         setLaunchDetail(checkLaunchDetail)
         const getSwapDetial = async () => {
-            const addressA = await tokenineSwap?.functions.tokenA()
+            const addressA = await launchPadContract?.functions.tokenA()
             if (addressA) {
                 setForBuyingTokenAddress(addressA[0])
             }
-            const addressB = await tokenineSwap?.functions.tokenB()
+            const addressB = await launchPadContract?.functions.tokenB()
             if (addressB) {
                 setLauchpadToken(addressB[0])
             }
-            const rate = await tokenineSwap?.functions.rate()
+            const rate = await launchPadContract?.functions.rate()
             if (rate) {
                 setTokenRate(rate[0])
             }
         }
         getSwapDetial()
-    }, [tokenineSwap, tokenBalance, decimals, address, history, chainId])
+    }, [launchPadContract, tokenBalance, decimals, address, history, chainId])
 
     useEffect(() => {
         const fetchLaunchTokenRemain = async () => {
-            const luanchpadRemain = await tokenineSwap?.functions.bBalance()
-            if (luanchpadRemain) {
-                setLaunchPadRemain(luanchpadRemain[0].toFixed(decimals))
-            }
-            const launchPadIncomeBalance = await tokenineSwap?.functions.aBalance()
-            if (launchPadIncomeBalance) {
-                setLaunchPadIncomeBalance(launchPadIncomeBalance[0].toFixed(decimals))
-            }
-            const payTo = await tokenineSwap?.functions.payTo()
-            if (payTo) {
-                setIsMerchant(payTo[0] === account)
+            try {
+                const luanchpadRemain = await launchPadContract?.functions.bBalance()
+                if (luanchpadRemain) {
+                    setLaunchPadRemain(luanchpadRemain[0].toFixed(decimals))
+                }
+                const launchPadIncomeBalance = await launchPadContract?.functions.aBalance()
+                if (launchPadIncomeBalance) {
+                    setLaunchPadIncomeBalance(launchPadIncomeBalance[0].toFixed(decimals))
+                }
+                const isMerchantValue = await launchPadContract?.functions.isMerchant(account)
+                if (isMerchantValue) {
+                    setIsMerchant(isMerchantValue[0])
+                }
+            } catch (err) {
+                console.error(err)
             }
         }
         fetchLaunchTokenRemain()
-    }, [account, decimals, launchCurrencyAmount, tokenineSwap])
+    }, [account, decimals, launchCurrencyAmount, launchPadContract])
 
     return (
         <>
@@ -267,7 +271,7 @@ function LaunchPadPage({
                                                 onClick={async () => {
                                                     try {
                                                         setIsCommiting(true)
-                                                        const response = await tokenineSwap?.functions.swap(startTokenBalance.toBigNumber(decimals))
+                                                        const response = await launchPadContract?.functions.swap(startTokenBalance.toBigNumber(decimals))
                                                         addTransaction(response, {
                                                             summary: 'Launch commited!'
                                                         })
@@ -312,7 +316,7 @@ function LaunchPadPage({
                                         <Button
                                             disabled={launchPadRemain === '0'}
                                             onClick={async () => {
-                                                const response = await tokenineSwap?.functions.ownerReclaimB()
+                                                const response = await launchPadContract?.functions.ownerReclaimB()
                                                 addTransaction(response, {
                                                     summary: 'Claimed!'
                                                 })
@@ -372,7 +376,7 @@ function LaunchPadPage({
                                     color="gradient3"
                                     disabled={launchPadIncomeBalance === '0'}
                                     onClick={async () => {
-                                        const response = await tokenineSwap?.functions.ownerReclaimA()
+                                        const response = await launchPadContract?.functions.ownerReclaimA()
                                         addTransaction(response, {
                                             summary: 'Claimed!'
                                         })

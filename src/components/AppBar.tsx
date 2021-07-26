@@ -90,14 +90,9 @@ function AppBar(): JSX.Element {
                                                         {i18n._(t`Lend`)}
                                                     </NavLink>
                                                 )} */}
-                                            {chainId &&
-                                                [ChainId.BSC_TESTNET].includes(
-                                                    chainId
-                                                ) && (
-                                                    <NavLink id={`bento-nav-link`} to={'/launchpad'}>
-                                                        {i18n._(t`Launchpad`)} {/* bentobox */}
-                                                    </NavLink>
-                                                )}
+                                            <NavLink id={`bento-nav-link`} to={'/launchpad'}>
+                                                {i18n._(t`Launchpad`)} {/* bentobox */}
+                                            </NavLink>
                                             {/* {chainId === ChainId.MAINNET && (
                                                 <NavLink id={`vesting-nav-link`} to={'/vesting'}>
                                                     {i18n._(t`Vesting`)}
@@ -362,12 +357,9 @@ function AppBar(): JSX.Element {
                                             {i18n._(t`Kashi Lending`)}
                                         </NavLink>
                                     )}
-                                {chainId &&
-                                    [ChainId.BSC_TESTNET].includes(chainId) && (
-                                        <NavLink id={`bento-nav-link`} to={'/launchpad'}>
-                                            {i18n._(t`Launchpad`)}
-                                        </NavLink>
-                                    )}
+                                <NavLink id={`bento-nav-link`} to={'/launchpad'}>
+                                    {i18n._(t`Launchpad`)}
+                                </NavLink>
                                 {/* {chainId === ChainId.MAINNET && (
                                     <NavLink id={`stake-nav-link`} to={'/sushibar'}>
                                         {i18n._(t`SushiBar`)}
