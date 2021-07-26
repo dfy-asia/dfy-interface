@@ -1,6 +1,6 @@
 import { ChainId, Currency } from 'dfy-sdk'
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Logo from '../assets/images/logo_white_full.png'
 import { useActiveWeb3React } from '../hooks/useActiveWeb3React'
 import { useETHBalances } from '../state/wallet/hooks'
@@ -46,7 +46,9 @@ function AppBar(): JSX.Element {
                             <div className="flex items-center justify-between h-16">
                                 <div className="flex items-center">
                                     <div className="flex-shrink-0">
-                                        <img src={Logo} alt="Sushi" className="h-10 w-auto" />
+                                        <Link to="/">
+                                            <img src={Logo} alt="Sushi" className="h-14 w-auto transition duration-300 ease-in-out transform  hover:scale-110" />
+                                        </Link>
                                     </div>
                                     <div className="hidden sm:block sm:ml-4">
                                         <div className="flex space-x-2">
