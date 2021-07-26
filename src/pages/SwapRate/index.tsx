@@ -15,6 +15,7 @@ import { Currency, CurrencyAmount, ETHER } from 'dfy-sdk'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 
 import ItemRateShow from './ItemRateShow'
+import { useCurrencyBalances } from 'state/wallet/hooks'
 
 const BackgroundMain = styled.div`
     margin-top: -40px;
@@ -26,13 +27,16 @@ const BackgroundMain = styled.div`
 function SwapRate(): JSX.Element {
     const { i18n } = useLingui()
 
-    const { chainId } = useActiveWeb3React()
+    const { account, chainId } = useActiveWeb3React()
 
     const factoryAddresses = useConfig(chainId)
 
     const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
 
-    const { currencyBalances, currencies } = useDerivedSwapInfo()
+    const startCurrency = useCurrency('ETH')
+
+    const [currencyInput, setCurrencyInput] = useState<Currency | undefined | null>(startCurrency)
+    const [currencyOutput, setCurrencyOutput] = useState<Currency | undefined | null>()
 
     const [inputValue, setInputValue] = useState('')
     
@@ -40,8 +44,6 @@ function SwapRate(): JSX.Element {
         [Field.INPUT]: { currencyId: inputCurrencyId},
         [Field.OUTPUT]: { currencyId: outputCurrencyId }
     } = useSwapState()
-
-    const startCurrency = useCurrency('ETH')
 
     const handleTypeInput = useCallback(
         (value: string) => {
@@ -61,15 +63,24 @@ function SwapRate(): JSX.Element {
     const handleInputSelect = useCallback(
         inputCurrency => {
             onCurrencySelection(Field.INPUT, inputCurrency)
+            setCurrencyInput(inputCurrency)
         },
         [onCurrencySelection]
     )
 
-    const handleOutputSelect = useCallback(outputCurrency => onCurrencySelection(Field.OUTPUT, outputCurrency), [
-        onCurrencySelection
+    const handleOutputSelect = useCallback(
+        outputCurrency => {
+            onCurrencySelection(Field.OUTPUT, outputCurrency)
+            setCurrencyOutput(outputCurrency)
+        }, 
+        [onCurrencySelection]
+    )
+
+    const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
+        currencyInput ?? undefined,
     ])
 
-    const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(currencyBalances[Field.INPUT])
+    const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(relevantTokenBalances[0])
 
     const handleMaxInput = useCallback(() => {
         maxAmountInput && onUserInput(Field.INPUT, maxAmountInput.toExact())
@@ -109,11 +120,11 @@ function SwapRate(): JSX.Element {
                                     }
                                     value={inputValue}
                                     showMaxButton={true}
-                                    currency={currencies[Field.INPUT]}
+                                    currency={currencyInput}
                                     onUserInput={handleTypeInput}
                                     onMax={handleMaxInput}
                                     onCurrencySelect={handleInputSelect}
-                                    otherCurrency={currencies[Field.OUTPUT]}
+                                    otherCurrency={currencyOutput}
                                     id="swap-currency-input"
                                 />
                             </div>
@@ -136,10 +147,10 @@ function SwapRate(): JSX.Element {
                                     hideInput
                                     value={''}
                                     showMaxButton={false}
-                                    currency={currencies[Field.OUTPUT]}
+                                    currency={currencyOutput}
                                     onUserInput={handleTypeOutput}
                                     onCurrencySelect={handleOutputSelect}
-                                    otherCurrency={currencies[Field.INPUT]}
+                                    otherCurrency={currencyInput}
                                     id="swap-currency-output"
                                 />
                             </div> 

@@ -158,8 +158,8 @@ export default function CurrencyInputPanel({
         setModalOpen(false)
     }, [setModalOpen])
 
-    const currencyUSDC = useUSDCPrice(currency ? currency : undefined)?.toFixed(18)
-    const valueUSDC = formattedNum(Number(value) * Number(currencyUSDC))
+    // const currencyUSDC = useUSDCPrice(currency ? currency : undefined)?.toFixed(18)
+    // const valueUSDC = formattedNum(Number(value) * Number(currencyUSDC))
 
     return (
         <div id={id} className="rounded border border-dark-800 p-5">
@@ -307,9 +307,9 @@ export default function CurrencyInputPanel({
                                               selectedCurrencyBalance?.toSignificant(6)
                                             : ' -'}
                                     </div>
-                                    {chainId === ChainId.MAINNET && (
+                                    {/* {chainId === ChainId.MAINNET && (
                                         <div className="font-medium text-xs text-secondary">≈ {valueUSDC} USDC</div>
-                                    )}
+                                    )} */}
                                 </div>
                             )}
                         </>
